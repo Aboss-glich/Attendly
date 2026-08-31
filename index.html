@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="app-common.js" defer></script>
+    <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+    <script src="qr-attendance.js" defer></script>
+    <script src="preferences.js" defer></script>
+    <title>Attendly | Attendance</title>
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand"><span class="brand-mark">A</span><span>attendly</span></div>
+            <p class="workspace-label">WORKSPACE</p>
+            <nav class="side-nav" aria-label="Main navigation">
+                <a href="dashboard.html"><span>⌂</span> Dashboard</a>
+                <a class="active" href="#attendance"><span>▦</span> Attendance</a>
+                <a href="students.html"><span>♙</span> Students</a>
+                <a href="reports.html"><span>◒</span> Reports</a>
+            </nav>
+            <div class="sidebar-bottom">
+                <a href="classes.html"><span>▤</span> Classes</a>
+                <a href="leaves.html"><span>▥</span> Leave requests</a>
+                <a href="settings.html"><span>⚙</span> Settings</a>
+                <div class="profile-mini"><span class="avatar">AK</span><span><strong>Anmol Kumar</strong><small>Administrator</small></span><span class="dots">•••</span></div>
+            </div>
+        </aside>
+
+        <main class="content" id="attendance">
+            <header class="topbar"><div><p class="eyebrow current-date"></p><h1>Good morning, Anmol <span>✦</span></h1></div><a class="icon-button notification-link" href="notifications.html" aria-label="Notifications">♢<i></i></a></header>
+            <section class="intro-row"><div><h2>Attendance overview</h2><p>Keep your class records clear and up to date.</p></div><div class="intro-actions"><label class="class-picker">Class <select id="classPicker"><option>Class 10-A</option><option>Class 10-B</option><option>Class 9-A</option></select></label><button class="secondary-button" id="openQrButton">▣ Optional QR</button><button class="primary-button" id="addStudentButton">＋ Add student</button></div></section>
+
+            <section class="stats-grid" aria-label="Attendance summary">
+                <article class="stat-card"><div class="stat-icon green">✓</div><div><span>Present today</span><strong id="presentCount">0</strong><small class="positive">↑ 4.2% <em>vs last week</em></small></div></article>
+                <article class="stat-card"><div class="stat-icon orange">◷</div><div><span>Late arrivals</span><strong id="lateCount">0</strong><small class="warning">↓ 1.8% <em>vs last week</em></small></div></article>
+                <article class="stat-card"><div class="stat-icon red">×</div><div><span>Absent today</span><strong id="absentCount">0</strong><small class="negative">↑ 0.6% <em>vs last week</em></small></div></article>
+                <article class="stat-card"><div class="stat-icon blue">♙</div><div><span>Total students</span><strong id="totalCount">0</strong><small class="muted">Across all classes</small></div></article>
+            </section>
+
+            <section class="insights-grid">
+                <article class="insight-panel"><div class="insight-heading"><div><h2>Weekly attendance</h2><p id="weekRange">Select a date to open its register</p></div><div class="chart-tools"><button type="button" id="previousWeek" aria-label="Show previous week">‹</button><strong id="weeklyRate">0%</strong><button type="button" id="nextWeek" aria-label="Show next week">›</button></div></div><div class="chart-scroll"><div class="chart" id="weeklyChart" aria-label="Weekly attendance dates"></div></div></article>
+                <article class="insight-panel quick-panel"><div class="insight-heading"><div><h2>Quick actions</h2><p>Common tasks for today</p></div><span class="spark">✦</span></div><div class="quick-actions"><button id="markAllButton"><span>✓</span> Mark everyone present</button><button id="clearAllButton"><span>↺</span> Clear today's register</button></div></article>
+            </section>
+
+            <section class="attendance-panel">
+                <div class="attendance-mode"><span class="mode-dot"></span><div><strong>In-person attendance</strong><small>Mark students as they arrive at school using the register below.</small></div><span class="mode-badge">Manual mode</span></div>
+                <div class="panel-header"><div><h2>Daily register</h2><p id="registerSubtitle">Class 10-A · Today</p></div><div class="controls"><div class="date-navigation"><button type="button" id="previousDay" aria-label="Show previous day">‹</button><label class="date-control">▣ <input type="date" id="datePicker"></label><button type="button" id="nextDay" aria-label="Show next day">›</button></div><label class="search-control">⌕ <input type="search" id="searchInput" placeholder="Search students"></label></div></div>
+                <div class="filter-row"><div class="filters" role="group" aria-label="Filter attendance"><button class="filter active" data-filter="all">All <b id="allFilterCount">0</b></button><button class="filter" data-filter="present">Present <b id="presentFilterCount">0</b></button><button class="filter" data-filter="late">Late <b id="lateFilterCount">0</b></button><button class="filter" data-filter="absent">Absent <b id="absentFilterCount">0</b></button><button class="filter" data-filter="leave">On leave <b id="leaveFilterCount">0</b></button><button class="filter" data-filter="unmarked">Not marked <b id="unmarkedFilterCount">0</b></button></div><button class="export-button" id="exportButton">⇩ Export CSV</button></div>
+                <div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>ROLL NO.</th><th>CHECK-IN</th><th>ATTENDANCE</th><th>STATUS</th><th></th></tr></thead><tbody id="studentRows"></tbody></table><div class="empty-state" id="emptyState" hidden>No students match your search.</div></div>
+                <div class="panel-footer"><span id="footerText">Showing 0 students</span><button class="save-button" id="saveButton">Save attendance <span>→</span></button></div>
+            </section>
+            <p class="save-message" id="saveMessage" role="status"></p>
+        </main>
+    </div>
+    <dialog id="qrDialog"><div class="qr-dialog"><button type="button" class="close-button" id="closeQrDialog" aria-label="Close">×</button><h2>Scan to mark attendance</h2><p id="qrSubtitle">Share this QR with students in the selected class.</p><div id="qrCode"></div><small id="qrExpiry"></small><button type="button" class="secondary-button" id="refreshQrButton">Generate new QR</button></div></dialog>
+    <dialog id="studentDialog"><form method="dialog" id="studentForm"><button type="button" class="close-button" id="closeStudentDialog" aria-label="Close">×</button><h2>Add student</h2><p>Add a student to today's register.</p><label>Student name<input required id="studentName" placeholder="e.g. Riya Sharma"></label><label>Roll number<input required id="studentRoll" placeholder="e.g. 11"></label><div class="dialog-actions"><button type="button" id="cancelStudentDialog" class="secondary-button">Cancel</button><button value="default" class="primary-button">Add student</button></div></form></dialog>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "username": "owner",
+      "role": "owner",
+      "name": "Owner",
+      "passwordHash": "ce71018269e919c089ecb542bbac279e21338fcb14237637c06e966be4375a42bebb9b1ed53426bbec5217811f7d004a35d02f65f20506463a45ba1337bd8e17",
+      "salt": "AttendlyDemoSalt2026"
+    }
+  ]
+}
