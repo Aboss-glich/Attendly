@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<script src="app-common.js" defer></script>
+	<script src="teachers.js" defer></script>
+	<script src="preferences.js" defer></script>
+	<title>Attendly | Teachers</title>
+</head>
+<body>
+	<div class="app-shell">
+		<aside class="sidebar"><div class="brand"><span class="brand-mark">A</span><span>attendly</span></div><p class="workspace-label">WORKSPACE</p><nav class="side-nav" aria-label="Main navigation"><a href="dashboard.html"><span>⌂</span> Dashboard</a><a href="index.html"><span>▦</span> Attendance</a><a href="students.html"><span>♙</span> Students</a><a href="reports.html"><span>◒</span> Reports</a></nav><div class="sidebar-bottom"><a href="classes.html"><span>▤</span> Classes</a><a href="leaves.html"><span>▥</span> Leave requests</a><a href="parents.html"><span>♧</span> Parents</a><a class="active" href="teachers.html"><span>♙</span> Teachers</a><a href="settings.html"><span>⚙</span> Settings</a><div class="profile-mini"><span class="avatar">AK</span><span><strong>Anmol Kumar</strong><small>Administrator</small></span><span class="dots">•••</span></div></div></aside>
+		<main class="content teachers-content">
+			<header class="topbar"><div><p class="eyebrow">STAFF DIRECTORY</p><h1>Teachers</h1></div><a class="back-link" href="index.html">← Back to attendance</a></header>
+			<section class="intro-row teachers-intro"><div><h2>Manage teaching staff</h2><p>Keep teacher assignments and contact details organized.</p></div><button class="primary-button" id="addTeacherButton">＋ Add teacher</button></section>
+			<section class="teacher-summary"><article><span>Teaching staff</span><strong id="teacherCount">0</strong></article><article><span>Assigned teachers</span><strong id="assignedCount">0</strong></article><article><span>Subjects covered</span><strong id="subjectCount">0</strong></article></section>
+			<section class="teacher-panel"><div class="teacher-toolbar"><label class="search-control">⌕ <input id="teacherSearch" type="search" placeholder="Search teachers or subjects"></label><select id="teacherFilter" class="simple-select"><option value="all">All teachers</option><option value="assigned">Assigned</option><option value="unassigned">Unassigned</option></select></div><div class="table-wrap"><table><thead><tr><th>TEACHER</th><th>SUBJECT</th><th>ASSIGNED CLASS</th><th>CONTACT</th><th>STATUS</th><th></th></tr></thead><tbody id="teacherRows"></tbody></table><div class="empty-state" id="teacherEmpty" hidden>No teachers found.</div></div></section>
+			<p class="save-message" id="teacherMessage" role="status"></p>
+		</main>
+	</div>
+	<dialog id="teacherDialog"><form method="dialog" id="teacherForm"><button type="button" class="close-button" id="closeTeacherDialog" aria-label="Close">×</button><h2 id="teacherDialogTitle">Add teacher</h2><p>Add staff details and class assignment.</p><label>Full name<input id="teacherName" required placeholder="e.g. Priya Sharma"></label><label>Subject<input id="teacherSubject" required placeholder="e.g. Mathematics"></label><label>Assigned class<select id="teacherClass"><option value="">Not assigned</option><option>Class 10-A</option><option>Class 10-B</option><option>Class 9-A</option></select></label><label>Phone number<input id="teacherPhone" type="tel" placeholder="+91 98765 43210"></label><div class="dialog-actions"><button type="button" id="cancelTeacherDialog" class="secondary-button">Cancel</button><button value="default" class="primary-button">Save teacher</button></div></form></dialog>
+</body>
+</html>

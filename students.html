@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<script src="app-common.js" defer></script>
+	<script src="students.js" defer></script>
+	<script src="preferences.js" defer></script>
+	<title>Attendly | Students</title>
+</head>
+<body>
+	<div class="app-shell">
+		<aside class="sidebar">
+			<div class="brand"><span class="brand-mark">A</span><span>attendly</span></div>
+			<p class="workspace-label">WORKSPACE</p>
+			<nav class="side-nav" aria-label="Main navigation">
+				<a href="dashboard.html"><span>⌂</span> Dashboard</a>
+				<a href="index.html"><span>▦</span> Attendance</a>
+				<a class="active" href="students.html"><span>♙</span> Students</a>
+				<a href="reports.html"><span>◒</span> Reports</a>
+			</nav>
+			<div class="sidebar-bottom"><a href="classes.html"><span>▤</span> Classes</a><a href="leaves.html"><span>▥</span> Leave requests</a><a href="settings.html"><span>⚙</span> Settings</a><div class="profile-mini"><span class="avatar">AK</span><span><strong>Anmol Kumar</strong><small>Administrator</small></span><span class="dots">•••</span></div></div>
+		</aside>
+		<main class="content students-content">
+			<header class="topbar"><div><p class="eyebrow">STUDENT DIRECTORY</p><h1>Students</h1></div><a class="back-link" href="index.html">← Back to attendance</a></header>
+			<section class="intro-row students-intro"><div><h2>Manage your students</h2><p>Add student details once and use them across every attendance record.</p></div><button class="primary-button" id="addStudentButton">＋ Add student</button></section>
+			<section class="student-summary"><article><span>Total students</span><strong id="totalStudents">0</strong></article><article><span>Class sections</span><strong id="classCount">3</strong></article><article><span>Average attendance</span><strong id="averageRate">0%</strong></article></section>
+			<section class="directory-panel"><div class="directory-toolbar"><div class="directory-controls"><label class="class-picker">Class <select id="classPicker"><option>Class 10-A</option><option>Class 10-B</option><option>Class 9-A</option></select></label><label class="search-control">⌕ <input id="studentSearch" type="search" placeholder="Search by name or roll"></label></div><span id="directoryCount">0 students</span></div><div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>ROLL NO.</th><th>ATTENDANCE</th><th>CONTACT</th><th>ADDED</th><th></th></tr></thead><tbody id="studentRows"></tbody></table><div class="empty-state" id="emptyState" hidden>No students found in this class.</div></div></section>
+		</main>
+	</div>
+	<dialog id="studentDialog"><form method="dialog" id="studentForm"><button type="button" class="close-button" id="closeStudentDialog" aria-label="Close">×</button><h2 id="dialogTitle">Add student</h2><p>Student details will be saved in the selected class.</p><input type="hidden" id="editingRoll"><label>Full name<input id="studentName" required placeholder="e.g. Riya Sharma"></label><label>Roll number<input id="studentRoll" required placeholder="e.g. 11"></label><label>Parent contact<input id="parentContact" type="tel" placeholder="e.g. +91 98765 43210"></label><label>Notes<input id="studentNotes" placeholder="Optional note"></label><div class="dialog-actions"><button type="button" id="cancelStudentDialog" class="secondary-button">Cancel</button><button value="default" class="primary-button">Save student</button></div></form></dialog>
+</body>
+</html>

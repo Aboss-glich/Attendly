@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Runtime / local application data
+storage.json
+storage.json.backup
+auth-users.json
+audit-log.json
+*.tmp
+
+# Local secrets / environment files
+.env
+.env.*
+!.env.example
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
